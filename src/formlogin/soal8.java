@@ -7,19 +7,34 @@
 package formlogin;
 
 import org.jpl7.Query;
+import org.jpl7.Term;
 
 /**
  *
  * @author notebook
  */
 public class soal8 extends javax.swing.JFrame {
-
+    String jawab = "[";
+    String pilih;
+    Query q10;
     /** Creates new form soal8 */
     public soal8() {
         initComponents();
         String s1 = "consult('C:/Users/Lenovo/Documents/NetBeansProjects/QuizProlog/abcd.pl')";
         Query q1 = new Query(s1);
         System.out.println(s1+""+(q1.hasSolution()? "Success" : "Failed"));
+        
+        String s10 = "linearList([9,[3,2]],X).";
+        q10 = new Query(s10);
+        Term listT = (Term) q10.oneSolution().get("X");
+        while(listT.arity() == 2){
+            jawab += String.valueOf(listT.arg(1));
+            jawab += ", ";
+            listT=listT.arg(2);
+        }
+        jawab = jawab.substring(0, jawab.length()-2);
+        jawab += "]";
+        System.out.println(jawab);
     }
 
     /** This method is called from within the constructor to
@@ -197,29 +212,26 @@ public class soal8 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String s10 = "X = [3,2]";
-        Query q10= new Query(s10);
-        System.out.println(s10+""+(q10.hasSolution()? "True" : "False"));
-        //System.out.println(q2.hasSolution());
-        textHasil.setText(String.valueOf(q10.hasSolution()? "False" : "True"));
+        pilih = jButton1.getText();
+        String s11 = "and(" + jawab + ", 1, " + pilih + ", 1).";
+        q10= new Query(s11);
+        textHasil.setText(String.valueOf(q10.hasSolution()? "Jawaban benar" : "Jawaban salah"));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String s10 = "X = [9,3,2]";
-        Query q10= new Query(s10);
-        System.out.println(s10+""+(q10.hasSolution()? "True" : "False"));
-        //System.out.println(q2.hasSolution());
-        textHasil.setText(String.valueOf(q10.hasSolution()? "False" : "True"));
+        pilih = jButton2.getText();
+        String s11 = "and(" + jawab + ", 1, " + pilih + ", 1).";
+        q10= new Query(s11);
+        textHasil.setText(String.valueOf(q10.hasSolution()? "Jawaban benar" : "Jawaban salah"));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        String s10 = "[9,3,2]";
-        Query q10= new Query(s10);
-        System.out.println(s10+""+(q10.hasSolution()? "True" : "False"));
-        //System.out.println(q2.hasSolution());
-        textHasil.setText(String.valueOf(q10.hasSolution()? "True" : "False"));
+        pilih = jButton3.getText();
+        String s11 = "and(" + jawab + ", 1, " + pilih + ", 1).";
+        q10= new Query(s11);
+        textHasil.setText(String.valueOf(q10.hasSolution()? "Jawaban benar" : "Jawaban salah"));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
